@@ -1,13 +1,13 @@
-version: 3.9
+version: "3.9"
 services:
   webscraping:
   # will build ./docker/webscraping/Dockerfile
-    build: ./docker/webscraping
+    build: ./webscraping
     ports: 
     - "5000:5000"
   neural-net:
   # will build ./docker/neural-net/Dockerfile
-    build: ./docker/neural-net
+    build: ./neural-net
     ports:
     - "8080:8080"
   redis:
