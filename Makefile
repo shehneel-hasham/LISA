@@ -1,2 +1,2 @@
-make app:
-streamlit run streamlit_app.py
+app:
+	cd neural-net && streamlit run streamlit_app.py
