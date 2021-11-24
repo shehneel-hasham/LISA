@@ -17,4 +17,16 @@ COPY . ./
 RUN go build 
 # TODO fix above
 
-FROM alpine:3.13.2
+# move onto another image for production
+# we copy accross all the go code from the above container
+# FROM alpine:3.13.2
+# etc
+# TODO
+# add more stuff here
+CMD ["go", "run", "main.go"]
+# returns csv in container, we need to get it out
+# set up a volume that is accessable by both containers
+# volume = directory
+# docker compose volume
+# volume represents something in my machine vs the containers
+# mount the volume in neural-net

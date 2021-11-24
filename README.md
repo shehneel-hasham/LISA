@@ -21,3 +21,9 @@ project
 The webscraping folder collects TedX transcripts from their website in Golang using Colly.
 
 The neural-net folder trains a deep learning model to predict the next words after an input word.
+
+## Running the app
+To fun the Streamlit application:
+```
+make app
+```
