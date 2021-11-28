@@ -11,3 +11,4 @@ RUN apt-get update && \
 
 RUN pip3 install streamlit
 RUN pip3 install torch
+RUN pip3 install numpy

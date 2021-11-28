@@ -7,7 +7,11 @@ Fun little project to help people write speeches. Aka most sophisticated way to 
  ```
  docker-compose up -d
  ```
-
+## Running the app
+To fun the Streamlit application:
+```
+make app
+```
 ## Project layout 
 ```
 project
@@ -16,14 +20,10 @@ project
 │
 └───webscraping
 │
+└───data-cleaning
+│
 └───neural-net
 ```
 The webscraping folder collects TedX transcripts from their website in Golang using Colly.
 
 The neural-net folder trains a deep learning model to predict the next words after an input word.
-
-## Running the app
-To fun the Streamlit application:
-```
-make app
-```
