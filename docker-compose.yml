@@ -10,5 +10,10 @@ services:
     build: ./neural-net
     ports:
     - "8080:8080"
+  data-cleaning:
+  # will build ./docker/data-cleaning/Dockerfile
+    build: ./data-cleaning
+    ports:
+    - "5050:5050"
   redis:
     image: "redis:alpine"

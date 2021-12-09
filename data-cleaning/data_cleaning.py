@@ -1,5 +1,4 @@
-# TODO: remove punctuation?
-# remove intro: "Details About the talk"
+# TODO: try again with punctuation 
 import csv
 import re
 
@@ -13,6 +12,12 @@ with open('../webscraping/talk_content.csv', 'r') as csvfile:
             i = re.sub(".+?(?=talk)", "", i, count = 1)
             i = re.sub("talk", "", i, count = 1)
             i = re.sub("^[ \t]+", "", i)
+            # make everything lowercase
+            i = i.lower()
+            # regex to keep uppercase:
+            # i = re.sub("[^a-zA-Z' ]", "", i)
+            # punctuation
+            i = re.sub("[^a-z' ]", "", i)
             DATA.append(str(i))
 # this is done to work with python types
 DATA.pop(0)
