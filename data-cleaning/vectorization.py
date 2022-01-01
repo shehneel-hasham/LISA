@@ -18,41 +18,45 @@ def create_sequence(text, len_seq = 5):
         return text
 
 
-def get_integer_seq(seq):
+def get_integer_seq(token2int, seq):
     return [token2int[w] for w in seq.split()]
 
 sequences = []
 with open('cleaned_data.csv', 'r') as csvfile:
     reader = csv.reader(csvfile)
-    sequences = [[create_sequence(i) for i in row] for row in reader]
+    # next line done for use this later, don't reduce
+    speeches = [[i for i in row] for row in reader]
+    # hack to unnest a list
+    speeches = sum(speeches, [])
+    sequences = [create_sequence(speech) for speech in speeches]
     sequences = sum(sequences, [])
+    # print the number of groups of 5 words
     print(len(sequences))
     # create inputs and targets (x and y)
+    # eg if default len_seq = 5
+    # the input would be the first 4 words of the sequence 
+    # and the target would be the last 4 words of the sequence
     x = []
     y = []
-    for s in sequences:
-        x.append(" ".join(s.split()[:-1]))
-        y.append(" ".join(s.split()[1:]))
-#         Traceback (most recent call last):
-#   File "vectorization.py", line 34, in <module>
-#     x.append(" ".join(s.split()[:-1]))
-# AttributeError: 'list' object has no attribute 'split'
+    for sequence in sequences:
+        x.append(" ".join(sequence.split()[:-1]))
+        y.append(" ".join(sequence.split()[1:]))
 
     # creating an integer to token dictionary
     int2token = {}
     count = 0
-    for row in reader:
-        for w in set(" ".join(row)):
+    for speech in speeches:
+        for w in set(speech.split()):
             int2token[count] = w
             count += 1
     token2int = {t: i for i, t in int2token.items()}
-    print(token2int(0))
 
     # convert text sequences to integer sequences
-    x_int = [get_integer_seq(i) for i in x]
-    y_int = [get_integer_seq(i) for i in y]
+    x_int = [get_integer_seq(token2int, i) for i in x]
+    y_int = [get_integer_seq(token2int, i) for i in y]
     # convert lists to numpy arrays
     x_int = np.array(x_int)
+    print(x_int)
     y_int = np.array(y_int)
-    numpy.savetxt("x_int.csv", x_int, delimiter=",")
-    numpy.savetxt("y_int.csv", y_int, delimiter=",")
+    np.savetxt("x_int.csv", x_int, delimiter=",")
+    np.savetxt("y_int.csv", y_int, delimiter=",")

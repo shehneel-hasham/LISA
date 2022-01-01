@@ -1,3 +1,11 @@
 talk_content.csv
 cleaned_data.csv
 binaries
+
+# pipenv 
+Pipfile
+Pipfile.lock
+
+# vectors
+x_int.csv
+y_int.csv
