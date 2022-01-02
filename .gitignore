@@ -9,3 +9,7 @@ Pipfile.lock
 # vectors
 x_int.csv
 y_int.csv
+
+# dictionaries
+token2int.json
+int2token.json

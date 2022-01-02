@@ -1,6 +1,7 @@
 import csv
 from os import read
 import numpy as np
+import json
 
 # vectorising the data set using one hot encoding
 # TODO: skip-grams
@@ -50,13 +51,18 @@ with open('cleaned_data.csv', 'r') as csvfile:
             int2token[count] = w
             count += 1
     token2int = {t: i for i, t in int2token.items()}
+    # saving dictionaries for later
+    # token2int:
+    with open(file="token2int.json", mode="w") as file:
+        json.dump(token2int, file, indent=4)
+    with open(file="int2token.json", mode="w") as file:
+        json.dump(int2token, file, indent=4)
 
     # convert text sequences to integer sequences
     x_int = [get_integer_seq(token2int, i) for i in x]
     y_int = [get_integer_seq(token2int, i) for i in y]
     # convert lists to numpy arrays
     x_int = np.array(x_int)
-    print(x_int)
     y_int = np.array(y_int)
     np.savetxt("x_int.csv", x_int, delimiter=",")
     np.savetxt("y_int.csv", y_int, delimiter=",")
