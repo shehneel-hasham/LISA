@@ -1,6 +1,7 @@
 import numpy
 import torch
 import torch.nn as nn
+import json
 
 class LSTM(nn.Module):
     
@@ -31,7 +32,7 @@ class LSTM(nn.Module):
         self.dropout = nn.Dropout(dropout_prob)
 
         # connected layer
-        self.connected = nn.Linear(self.hidden, self.vocab_size)
+        self.fully_connected = nn.Linear(self.hidden, self.vocab_size)
 
     def forward(self, x, hidden):
         # running through neural net
@@ -39,12 +40,26 @@ class LSTM(nn.Module):
         lstm_output, hidden_layer = self.lstm(embed, hidden)
         output = self.dropout(lstm_output)
 
-        # TODO might error here because of reshape
         output = output.reshape(-1, self.hidden)
 
-        output = self.connected(output)
+        output = self.fully_connected(output)
 
         return output, hidden_layer
 
     def initialiseTensors(self, batch_size):
-        pass
+        """
+        Initialise the tensor for the hidden layer
+        """
+        return (torch.zeros(self.layers, batch_size, self.hidden),
+                torch.zeros(self.layers, batch_size, self.hidden))
+
+# loading the dictionary
+try:
+    with open("data/int2token.json", mode="r") as file:
+        int2token = json.load(file)
+except FileNotFoundError:
+    print("Please run data_cleaning.py to generate int2token.json before continuing")
+
+# testing LSTM infrastructure with dictionary
+net = LSTM(int2token)
+print(net)
