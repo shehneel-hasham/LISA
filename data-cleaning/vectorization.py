@@ -23,7 +23,7 @@ def get_integer_seq(token2int, seq):
     return [token2int[w] for w in seq.split()]
 
 sequences = []
-with open('cleaned_data.csv', 'r') as csvfile:
+with open('data/cleaned_data.csv', 'r') as csvfile:
     reader = csv.reader(csvfile)
     # next line done for use this later, don't reduce
     speeches = [[i for i in row] for row in reader]
@@ -53,9 +53,9 @@ with open('cleaned_data.csv', 'r') as csvfile:
     token2int = {t: i for i, t in int2token.items()}
     # saving dictionaries for later
     # token2int:
-    with open(file="token2int.json", mode="w") as file:
+    with open(file="data/token2int.json", mode="w") as file:
         json.dump(token2int, file, indent=4)
-    with open(file="int2token.json", mode="w") as file:
+    with open(file="data/int2token.json", mode="w") as file:
         json.dump(int2token, file, indent=4)
 
     # convert text sequences to integer sequences
@@ -64,5 +64,5 @@ with open('cleaned_data.csv', 'r') as csvfile:
     # convert lists to numpy arrays
     x_int = np.array(x_int)
     y_int = np.array(y_int)
-    np.savetxt("x_int.csv", x_int, delimiter=",")
-    np.savetxt("y_int.csv", y_int, delimiter=",")
+    np.savetxt("data/x_int.csv", x_int, delimiter=",")
+    np.savetxt("data/y_int.csv", y_int, delimiter=",")
