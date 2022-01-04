@@ -1,7 +1,20 @@
-import numpy
 import torch
 import torch.nn as nn
 import json
+
+def get_batches(x_vec, y_vec, batch_size):
+    """
+    split the tensors into batches using a generator function
+    as the tensors are large
+    """
+    place_holder = 0
+    for i in range(start=batch_size, stop=x_vec.shape[0], step=batch_size):
+        x = x_vec[place_holder:i, :]
+        y = y_vec[place_holder:i, :]
+
+        place_holder += i
+
+        yield x,y
 
 class LSTM(nn.Module):
     
