@@ -7,7 +7,7 @@ def get_batches(x_vec, y_vec, batch_size):
     split the tensors into batches using a generator function
     as the tensors are large
     """
-    if batch_size % x_vec != 0 or batch_size % y_vec != 0:
+    if x_vec % batch_size != 0 or y_vec % batch_size != 0:
         get_batches.throw(IndexError("The batch size must be divisible by size of the input vectors"))
 
     place_holder = 0
