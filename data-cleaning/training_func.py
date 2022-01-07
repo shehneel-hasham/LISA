@@ -39,7 +39,6 @@ def train(neural_net, x_int, y_int, epochs=10, batch_size=32, loss_rate=0.001, c
             # if this isn't done then the gradients will be exploding or vanishing
             # TODO delete line below
             # hidden = tuple([hid.data for hid in hidden])
-            # print(type(hidden[0]))
             hidden = [hid.detach() for hid in hidden]
             # hidden = hidden.detach()
 
@@ -59,4 +58,4 @@ def train(neural_net, x_int, y_int, epochs=10, batch_size=32, loss_rate=0.001, c
             # update the weights
             optimiser.step()
 
-            print(f"Epoch: {epoch_counter} of {epochs}\n")
+            print(f"Epoch: {epoch_counter} of {epochs}\nLoss: {loss}\n")

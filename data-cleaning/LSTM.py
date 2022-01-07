@@ -8,12 +8,6 @@ def get_batches(x_vec, y_vec, batch_size):
     split the tensors into batches using a generator function
     as the tensors are large
     """
-    # try:
-    #     print(x_vec.shape[0])
-    #     x_vec.shape[0] % batch_size != 0 
-    #     y_vec.shape[0] % batch_size != 0
-    # except:
-    #     raise IndexError("The batch size must be divisible by size of the input vectors")
 
     n_x = x_vec.shape[0] % batch_size 
     if n_x != 0:
@@ -24,10 +18,10 @@ def get_batches(x_vec, y_vec, batch_size):
 
     place_holder = 0
     for i in range(batch_size, x_vec.shape[0], batch_size):
-        x = x_vec[place_holder:i, :]
-        y = y_vec[place_holder:i, :]
+        x = x_vec[place_holder:i, ]
+        y = y_vec[place_holder:i, ]
 
-        place_holder += i
+        place_holder = i
 
         yield x,y
 
@@ -52,7 +46,7 @@ class LSTM(nn.Module):
             hidden_size=self.hidden, 
             num_layers=self.layers, 
             dropout=dropout_prob, 
-            batch_first=False
+            batch_first=True
             )
 
         # dropout layer

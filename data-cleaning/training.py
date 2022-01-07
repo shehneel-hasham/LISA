@@ -2,6 +2,7 @@ from LSTM import LSTM
 import training_func
 import json
 import numpy as np
+import torch
 
 # loading the dictionary
 try:
@@ -24,3 +25,4 @@ neural_net = LSTM(int2token)
 print(neural_net)
 
 training_func.train(neural_net=neural_net, x_int=x_int, y_int=y_int, epochs=10, batch_size=5)
+torch.save(training_func, "data/trained_LSTM")
