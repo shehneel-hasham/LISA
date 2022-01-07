@@ -7,8 +7,8 @@ Pipfile
 Pipfile.lock
 
 # vectors
-x_int.csv
-y_int.csv
+x_int.txt
+y_int.txt
 
 # dictionaries
 token2int.json

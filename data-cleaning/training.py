@@ -1,27 +1,26 @@
-import LSTM
-import torch
-import torch.nn as nn
+from LSTM import LSTM
+import training_func
+import json
+import numpy as np
 
-def train(neural_net, x_int, y_int, epochs=10, batch_size=32, loss_rate=0.001, clip_value=1):
-    
-    # takes in parameters on the neural net, this is a pytorch thing
-    optimiser = torch.optim.Adam(neural_net.parameters(), lr=loss_rate)
+# loading the dictionary
+try:
+    with open("data/int2token.json", mode="r") as file:
+        int2token = json.load(file)
+except FileNotFoundError:
+    print("Please run data_cleaning.py to generate int2token.json before continuing")
 
-    loss = nn.CrossEntropyLoss()
+try:
+    x_int = np.loadtxt("data/x_int.txt", delimiter=",")
+except FileNotFoundError:
+    print("Please run vectorization.py to generate x_int.txt before continuing")
 
-    epoch_counter = 0
+try:
+    y_int = np.loadtxt("data/y_int.txt", delimiter=",")
+except FileNotFoundError:
+    print("Please run vectorization.py to generate y_int.txt before continuing")
 
-    # sets the neural_net module in training mode
-    # this is equivalent to neural_net.eval() or neural_net.train(mode=False)
-    neural_net.train()
+neural_net = LSTM(int2token)
+print(neural_net)
 
-    for epoch in range(epochs):
-
-        # initialise using function in LSTM
-        hidden = neural_net.initialiseTensors(batch_size)
-
-        for x, y in LSTM.get_batches(x_int, y_int, batch_size):
-
-            epoch_counter += 1
-
-            # backpropagation
+training_func.train(neural_net=neural_net, x_int=x_int, y_int=y_int, epochs=10, batch_size=5)
