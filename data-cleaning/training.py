@@ -1,3 +1,4 @@
+from os import read
 from LSTM import LSTM
 import training_func
 import json
@@ -24,5 +25,20 @@ except FileNotFoundError:
 neural_net = LSTM(int2token)
 print(neural_net)
 
+# rename this module!!! so confusing 
 training_func.train(neural_net=neural_net, x_int=x_int, y_int=y_int, epochs=10, batch_size=64)
-torch.save(training_func, "data/trained_LSTM")
+# torch.save(training_func, "data/trained_LSTM")
+# checkpoint = {'state_dict': training_func.state_dict(),'optimizer' :optimizer.state_dict()}
+# training_func.load_state_dict(checkpoint['model_state_dict'])
+# optimizer.load_state_dict(checkpoint['optimizer_state_dict'])
+# epoch = checkpoint['epoch']
+# loss = checkpoint['loss']
+
+# model.eval()
+torch.save({
+    "training_func_state_dict": neural_net.state_dict(),
+}, "data/trained/trained_model")
+# with open("trained_LSTM") as file:
+#     lines = file.read()
+# optimizer = lines
+# optimizer.load_state_dict(lines)

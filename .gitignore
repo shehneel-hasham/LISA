@@ -6,10 +6,5 @@ binaries
 Pipfile
 Pipfile.lock
 
-# vectors
-x_int.txt
-y_int.txt
-
-# dictionaries
-token2int.json
-int2token.json
+# data files
+data

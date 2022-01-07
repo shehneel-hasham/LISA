@@ -55,5 +55,7 @@ def train(neural_net, x_int, y_int, epochs=10, batch_size=32, loss_rate=0.001, c
             # update the weights
             optimiser.step()
 
+            torch.save(optimiser.state_dict(),"data/trained/trained_optimiser")
+
             if epoch_counter % 32:
                 print(f"Epoch: {epoch_counter} of {epochs}\nLoss: {loss}\n")

@@ -15,6 +15,11 @@ def get_batches(x_vec, y_vec, batch_size):
     n_y = y_vec.shape[0] % batch_size 
     if n_y != 0:
         y_vec = y_vec[:(y_vec.shape[0]-n_y)]
+    
+    # for test purposes!!
+    # delete these two lines for the full dataset
+    x_vec = x_vec[0:100,]
+    y_vec = y_vec[0:100,]
 
     place_holder = 0
     for i in range(batch_size, x_vec.shape[0], batch_size):
