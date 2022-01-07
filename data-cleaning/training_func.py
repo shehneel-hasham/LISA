@@ -18,7 +18,7 @@ def train(neural_net, x_int, y_int, epochs=10, batch_size=32, loss_rate=0.001, c
 
     epoch_counter = 0
 
-    for _ in range(1, epochs+1):
+    for _ in range(0, epochs):
 
         epoch_counter += 1
 
@@ -37,10 +37,7 @@ def train(neural_net, x_int, y_int, epochs=10, batch_size=32, loss_rate=0.001, c
             # "detach" hidden state so that the gradient is not calculated using it
             # hence the neural net is not learning from the hidden state
             # if this isn't done then the gradients will be exploding or vanishing
-            # TODO delete line below
-            # hidden = tuple([hid.data for hid in hidden])
             hidden = [hid.detach() for hid in hidden]
-            # hidden = hidden.detach()
 
             # set gradients of all parameters to zero
             neural_net.zero_grad()
@@ -58,4 +55,5 @@ def train(neural_net, x_int, y_int, epochs=10, batch_size=32, loss_rate=0.001, c
             # update the weights
             optimiser.step()
 
-            print(f"Epoch: {epoch_counter} of {epochs}\nLoss: {loss}\n")
+            if epoch_counter % 32:
+                print(f"Epoch: {epoch_counter} of {epochs}\nLoss: {loss}\n")
