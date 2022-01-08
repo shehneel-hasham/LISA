@@ -18,11 +18,11 @@ project
 │   README.md
 │   docker-compose.yml
 │
-└───webscraping
+└───webscraping (golang)
 │
-└───neural-net
+└───neural_net (python)
         │
-        └───data-cleaning
+        └───data_cleaning
 ```
 The webscraping folder collects TedX transcripts from their website in Golang using Colly.
 
