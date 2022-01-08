@@ -1,21 +1,32 @@
 import torch
 import torch.nn as nn
-import json
+import numpy as np
+# import json
 
 def get_batches(x_vec, y_vec, batch_size):
     """
     split the tensors into batches using a generator function
     as the tensors are large
     """
-    if x_vec % batch_size != 0 or y_vec % batch_size != 0:
-        get_batches.throw(IndexError("The batch size must be divisible by size of the input vectors"))
+
+    n_x = x_vec.shape[0] % batch_size 
+    if n_x != 0:
+        x_vec = x_vec[:(x_vec.shape[0]-n_x)]
+    n_y = y_vec.shape[0] % batch_size 
+    if n_y != 0:
+        y_vec = y_vec[:(y_vec.shape[0]-n_y)]
+    
+    # for test purposes!!
+    # delete these two lines for the full dataset
+    x_vec = x_vec[0:100,]
+    y_vec = y_vec[0:100,]
 
     place_holder = 0
-    for i in range(start=batch_size, stop=x_vec.shape[0], step=batch_size):
-        x = x_vec[place_holder:i, :]
-        y = y_vec[place_holder:i, :]
+    for i in range(batch_size, x_vec.shape[0], batch_size):
+        x = x_vec[place_holder:i, ]
+        y = y_vec[place_holder:i, ]
 
-        place_holder += i
+        place_holder = i
 
         yield x,y
 
@@ -69,13 +80,13 @@ class LSTM(nn.Module):
         return (torch.zeros(self.layers, batch_size, self.hidden),
                 torch.zeros(self.layers, batch_size, self.hidden))
 
-# loading the dictionary
-try:
-    with open("data/int2token.json", mode="r") as file:
-        int2token = json.load(file)
-except FileNotFoundError:
-    print("Please run data_cleaning.py to generate int2token.json before continuing")
+# # loading the dictionary
+# try:
+#     with open("data/int2token.json", mode="r") as file:
+#         int2token = json.load(file)
+# except FileNotFoundError:
+#     print("Please run data_cleaning.py to generate int2token.json before continuing")
 
-# testing LSTM infrastructure with dictionary
-net = LSTM(int2token)
-print(net)
+# # testing LSTM infrastructure with dictionary
+# net = LSTM(int2token)
+# print(net)

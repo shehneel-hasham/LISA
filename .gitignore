@@ -6,10 +6,8 @@ binaries
 Pipfile
 Pipfile.lock
 
-# vectors
-x_int.csv
-y_int.csv
+# data files
+data
 
-# dictionaries
-token2int.json
-int2token.json
+# cache files
+__pycache__

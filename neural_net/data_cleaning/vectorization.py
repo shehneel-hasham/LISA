@@ -64,5 +64,5 @@ with open('data/cleaned_data.csv', 'r') as csvfile:
     # convert lists to numpy arrays
     x_int = np.array(x_int)
     y_int = np.array(y_int)
-    np.savetxt("data/x_int.csv", x_int, delimiter=",")
-    np.savetxt("data/y_int.csv", y_int, delimiter=",")
+    np.savetxt("data/x_int.txt", x_int, delimiter=",")
+    np.savetxt("data/y_int.txt", y_int, delimiter=",")
