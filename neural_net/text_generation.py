@@ -1,11 +1,12 @@
 import torch
-from data_cleaning import LSTM
+from data_cleaning.LSTM_class import LSTM
 # TODO sort out the file imports
 # TODO check this works!!
 # TODO delete all unused code
 # TODO train neural-net on all data
+# TODO update readme and file structure
 
-LSTM_model = torch.load("../data-cleaning/data/trained/trained_model")
+LSTM_model = torch.load("data_cleaning/data/trained/trained_model")
 model = LSTM()
 model.load_state_dict(LSTM_model["training_func_state_dict"])
 print(model)

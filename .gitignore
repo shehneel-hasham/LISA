@@ -8,3 +8,6 @@ Pipfile.lock
 
 # data files
 data
+
+# cache files
+__pycache__

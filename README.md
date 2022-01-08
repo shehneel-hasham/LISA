@@ -20,9 +20,9 @@ project
 │
 └───webscraping
 │
-└───data-cleaning
-│
 └───neural-net
+        │
+        └───data-cleaning
 ```
 The webscraping folder collects TedX transcripts from their website in Golang using Colly.
 
